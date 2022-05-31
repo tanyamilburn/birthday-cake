@@ -11,25 +11,35 @@ var musicKey = "ce5a466979b88e9a90356a68807c9a00"
 var place = document.querySelector("#place")
 var genre = document.querySelector("#genre")
 var submit = document.querySelector("#submit")
+var dropDown = document.querySelector("#dropDown")
+
+var termsB
+var genreTerm
+
+var clearMoods = ["happy", "hopeful", "smile"]
+
 
 function genreFetch() {
+  capitalize(genre)
+  genreTerm = termsB
   fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/music.genres.get&apikey=" + musicKey)
     .then(res => res.json())
     .then(data => allGenres = data)
-    //.then(() => console.log(allGenres))
     .then(function(data) {
-    
-      console.log(allGenres)
-      for (let i = 0;i <= allGenres.message.body.music_genre_list.length; i++) {
-        if (genre = allGenres.message.body.music_genre_list[i].music_genre.music_genre_name) {
+      for (let i = 0;i < allGenres.message.body.music_genre_list.length; i++) {
+        if (allGenres.message.body.music_genre_list[i].music_genre.music_genre_name == genreTerm) {
           idNumber = allGenres.message.body.music_genre_list[i].music_genre.music_genre_id
-          console.log(genre)
+          console.log("genre chosen:", genreTerm)
           console.log("genre id is:", idNumber)
         }
+        else {
+          console.log("no")
+        }
       }
-
+      fetchCoords()
+      genre.value = ""
+      place.value = ""
 })}
-
 
 function musicSearch() {
   fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?f_music_genre_id=1010&f_track_release_group_first_release_date_min=19951212&f_track_release_group_first_release_date_max=19991212&apikey=" + musicKey)
@@ -39,7 +49,7 @@ function musicSearch() {
   }
 
 function fetchCoords() {
-  fetch("https://blooming-lowlands-18463.herokuapp.com/http://api.openweathermap.org/geo/1.0/direct?q="+place.value+"&limit=1&appid="+apiKey)
+  fetch("https://blooming-lowlands-18463.herokuapp.com/http://api.openweathermap.org/geo/1.0/direct?q="+place.value+"&limit=1&appid="+weatherKey)
   .then(res => res.json())
   .then(data => aResults = data)
   .then(() => convertCoords())
@@ -59,7 +69,19 @@ function convertCoords() {
         })
     .then(function(data) {
         weather = data
-        console.log(weather)
+        console.log(weather.current.weather[0].main)
 })}
+
+function randoMood(mood) {
+  var randoMoodSearch = mood[Math.floor(Math.random()*mood.length)];
+  console.log(randoMoodSearch)
+}
+
+function capitalize(term) {
+  var terms = term.value.split(" ")
+  termsB = terms.map((word) => { 
+      return word[0].toUpperCase() + word.substring(1)}).join(" ")
+}
+
 
 submit.addEventListener("click", genreFetch)

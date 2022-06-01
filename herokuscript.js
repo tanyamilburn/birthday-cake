@@ -5,6 +5,8 @@
   //   .then(data => aResults = data)
   //   .then(() => console.log(aResults))
 
+// &f_track_release_group_first_release_date_min=19951212&f_track_release_group_first_release_date_max=19991212
+
 var weatherKey = "8f14f498b80df53efe91f44dcb494851"
 var musicKey = "ce5a466979b88e9a90356a68807c9a00"
 
@@ -14,9 +16,14 @@ var submit = document.querySelector("#submit")
 var dropDown = document.querySelector("#dropDown")
 
 var termsB
+var idNumber
 var genreTerm
+var weatherMoodWord
+var randoMoodResult
 
-var clearMoods = ["happy", "hopeful", "smile"]
+var cloudyMoods = ["glum", "pensive"]
+var clearMoods = ["happy", "hopeful", "smile", "pleasant", "content", "bliss", "blissful"]
+var moodObject = {"Clear": clearMoods, "Cloudy": cloudyMoods}
 
 
 function genreFetch() {
@@ -42,10 +49,10 @@ function genreFetch() {
 })}
 
 function musicSearch() {
-  fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?f_music_genre_id=1010&f_track_release_group_first_release_date_min=19951212&f_track_release_group_first_release_date_max=19991212&apikey=" + musicKey)
+  fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_lyrics="+randoMoodResult+"f_music_genre_id="+idNumber+"&apikey="+musicKey)
     .then(res => res.json())
     .then(data => mResults = data)
-    .then(() => console.log(mResults))
+    .then(() => console.log("a song:", mResults))
   }
 
 function fetchCoords() {
@@ -70,11 +77,21 @@ function convertCoords() {
     .then(function(data) {
         weather = data
         console.log(weather.current.weather[0].main)
+        weatherMoodWord = weather.current.weather[0].main
+        divineWeather()
 })}
 
+function divineWeather () {
+ 
+  console.log("??", moodObject[weatherMoodWord])
+  randoMood(moodObject[weatherMoodWord])
+  musicSearch()
+}
+
 function randoMood(mood) {
-  var randoMoodSearch = mood[Math.floor(Math.random()*mood.length)];
-  console.log(randoMoodSearch)
+  randoMoodResult = mood[Math.floor(Math.random()*mood.length)];
+  console.log("mood result is:", randoMoodResult)
+  
 }
 
 function capitalize(term) {

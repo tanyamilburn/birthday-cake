@@ -18,6 +18,10 @@ var genre = document.querySelector("#genre")
 var submit = document.querySelector("#submit")
 var dropDown = document.querySelector("#dropDown")
 
+var trackNameArray = []
+var trackNumberArray = []
+
+
 var termsB
 var idNumber
 var genreTerm
@@ -62,14 +66,16 @@ function musicSearch() {
     .then(res => res.json())
     .then(data => mResults = data)
     .then(() => console.log("a list of songs based on genre and weather should be here:", mResults))
-
+    .then(function(data) {
+      pushFunction()
+    })}
 
 //this is here to be an example of what a successful search for songs by the keyword "lonely" would look like.
-  fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_lyrics=lonely&apikey=ce5a466979b88e9a90356a68807c9a00")
-    .then(res => res.json())
-    .then(data => obj = data)
-    .then(() => console.log("here is what a search for the word lonely looks like", obj))
-  }
+  // fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_lyrics=lonely&apikey=ce5a466979b88e9a90356a68807c9a00")
+  //   .then(res => res.json())
+  //   .then(data => obj = data)
+  //   .then(() => console.log("here is what a search for the word lonely looks like", obj))
+  // }
 
 // fetches the coordinates from openweather
 function fetchCoords() {
@@ -106,14 +112,14 @@ function convertCoords() {
 function beginWeatherSearch () {
  
   console.log("this should choose the array with the appropriate mood words:", moodObject[weatherMoodWord])
-  randoMood(moodObject[weatherMoodWord])
+  randomizer(moodObject[weatherMoodWord])
   musicSearch()
 }
 
 //randomizer for picking mood-words from the arrays
-function randoMood(mood) {
-  randoMoodResult = mood[Math.floor(Math.random()*mood.length)];
-  console.log("random mood result is:", randoMoodResult)
+function randomizer(mood) {
+  randoMoodResult = mood[Math.floor(Math.random()*mood.length)]
+  console.log("random lyrics/mood result is:", randoMoodResult)
   
 }
 
@@ -122,6 +128,26 @@ function capitalize(term) {
   var terms = term.value.split(" ")
   termsB = terms.map((word) => { 
       return word[0].toUpperCase() + word.substring(1)}).join(" ")
+}
+
+// this populates two different arrays with both song names and song numbers
+// and then provides full track information for one randomly chosen.
+function pushFunction() {
+  for (let i = 0; i < mResults.message.body.track_list.length; i++) {
+    trackNameArray.push(mResults.message.body.track_list[i].track.track_name)
+    trackNumberArray.push(mResults.message.body.track_list[i].track.commontrack_id)
+  }
+  console.log("ten songs:", trackNameArray)
+  console.log("ten song id numbers:", trackNumberArray)
+
+  aRandomSong = trackNameArray[Math.floor(Math.random()*trackNameArray.length)]
+  aRandomSongID = trackNumberArray[Math.floor(Math.random()*trackNumberArray.length)]
+
+
+  fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.get?commontrack_id="+aRandomSongID+"&apikey="+musicKey)
+    .then(res => res.json())
+    .then(data => trackInfo = data)
+    .then(() => console.log("randomly a |song:", trackInfo.message.body.track.track_name, "|album:", trackInfo.message.body.track.album_name,"|artist:", trackInfo.message.body.track.artist_name))
 }
 
 

@@ -21,7 +21,7 @@ var dropDown = document.querySelector("#dropDown")
 var termsB
 var idNumber
 var genreTerm
-var weatherMoodWord
+var weatherMoodWord 
 var randoMoodResult
 
 // what fun it will be to think of all the words for all the weather.
@@ -31,7 +31,7 @@ var rainMoods =["sad", "lonely", "depression", "broken", "isolation", "cold", "r
 var drizzleMoods = ["cold", "icy", "lonely", "sad", "cry"]
 var thunderMoods = ["storm", "stormy", "angry", "anger", "rage", "fear", "scared", "troubled"]
 var snowMoods =["cold", "cozy", "calm", "solice", "winter", "chill", "frost", "ice"]
-var moodObject = {"Clear": clearMoods, "Cloudy": cloudyMoods, "Rain": rainMoods, "Drizzle": drizzleMoods, "Thunderstorm": thunderMoods, "Snow": snowMoods}
+var moodObject = {"Clear": clearMoods, "Clouds": cloudyMoods, "Rain": rainMoods, "Drizzle": drizzleMoods, "Thunderstorm": thunderMoods, "Snow": snowMoods}
 
 // this capitalizes the genre search term, and then loops through the whole 
 // long list of genres to find the ID number attached to the genre-word. (The search
@@ -101,7 +101,7 @@ function convertCoords() {
         weatherMoodWord = weather.current.weather[0].main
         console.log("variable weatherMoodWord is:", weatherMoodWord)
 
-        beginWeatherSearch()
+        beginWeatherSearch(weatherMoodWord)
 })}
 
 // this function is set to call the other functions that will actually perform

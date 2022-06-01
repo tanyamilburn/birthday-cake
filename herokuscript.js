@@ -30,7 +30,7 @@ var randoMoodResult
 
 // what fun it will be to think of all the words for all the weather.
 var cloudyMoods = ["glum", "pensive", "thoughtful", "gloomy", "blue"]
-var clearMoods = ["happy", "hopeful", "smile", "pleasant", "content", "bliss", "blissful", "sun", "sunshine", "bright", "laught"]
+var clearMoods = ["happy", "hopeful", "smile", "pleasant", "content", "bliss", "blissful", "sun", "sunshine", "bright", "laugh"]
 var rainMoods =["sad", "lonely", "depression", "broken", "isolation", "cold", "rainy", "rain", "dark", "alone", "sorrow", "grief", "despair", "cry", "crying", "cried"]
 var drizzleMoods = ["cold", "icy", "lonely", "sad", "cry"]
 var thunderMoods = ["storm", "stormy", "angry", "anger", "rage", "fear", "scared", "troubled"]

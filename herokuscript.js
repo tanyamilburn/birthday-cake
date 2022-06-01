@@ -58,7 +58,7 @@ function genreFetch() {
 
 // the main music search function
 function musicSearch() {
-  fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_lyrics="+randoMoodResult+"f_music_genre_id="+idNumber+"&apikey="+musicKey)
+  fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_lyrics="+randoMoodResult+"&f_music_genre_id="+idNumber+"&apikey="+musicKey)
     .then(res => res.json())
     .then(data => mResults = data)
     .then(() => console.log("a list of songs based on genre and weather should be here:", mResults))

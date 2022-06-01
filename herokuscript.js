@@ -137,6 +137,8 @@ function capitalize(term) {
 // this populates two different arrays with both song names and song numbers
 // and then provides full track information for one randomly chosen.
 function pushFunction() {
+  trackNameArray = []
+  trackNumberArray = []
   for (let i = 0; i < mResults.message.body.track_list.length; i++) {
     trackNameArray.push(mResults.message.body.track_list[i].track.track_name)
     trackNumberArray.push(mResults.message.body.track_list[i].track.commontrack_id)
@@ -150,9 +152,31 @@ function pushFunction() {
 
   fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.get?commontrack_id="+aRandomSongID+"&apikey="+musicKey)
     .then(res => res.json())
-    .then(data => trackInfo = data)
-    .then(() => console.log("randomly a |song:", trackInfo.message.body.track.track_name, "|album:", trackInfo.message.body.track.album_name,"|artist:", trackInfo.message.body.track.artist_name))
+    .then(data => {
+      console.log('data', data)
+      if(data.message.body) {
+        const { track_name, artist_name, album_name } = data.message.body.track
+
+        console.log(
+          "randomly a |song:", track_name,
+          "|album:", album_name,
+          "|artist:", artist_name
+        )
+        renderResultToScreen(track_name, artist_name, album_name)
+      } else {
+        renderResultToScreen()
+      }
+    })
 }
 
+function renderResultToScreen(track, artist, album){
+  result = document.querySelector(".songDisplay")
 
+  if(track && artist && album) {
+    result.innerHTML = `${track} ${artist} ${album}`
+    console.log(track)
+  } else {
+    result.innerHTML = 'Woopsie doopsie'
+  }
+}
 submit.addEventListener("click", genreFetch)

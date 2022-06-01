@@ -25,9 +25,13 @@ var weatherMoodWord
 var randoMoodResult
 
 // what fun it will be to think of all the words for all the weather.
-var cloudyMoods = ["glum", "pensive"]
-var clearMoods = ["happy", "hopeful", "smile", "pleasant", "content", "bliss", "blissful"]
-var moodObject = {"Clear": clearMoods, "Cloudy": cloudyMoods}
+var cloudyMoods = ["glum", "pensive", "thoughtful", "gloomy", "blue"]
+var clearMoods = ["happy", "hopeful", "smile", "pleasant", "content", "bliss", "blissful", "sun", "sunshine", "bright", "laught"]
+var rainMoods =["sad", "lonely", "depression", "broken", "isolation", "cold", "rainy", "rain", "dark", "alone", "sorrow", "grief", "despair", "cry", "crying", "cried"]
+var drizzleMoods = ["cold", "icy", "lonely", "sad", "cry"]
+var thunderMoods = ["storm", "stormy", "angry", "anger", "rage", "fear", "scared", "troubled"]
+var snowMoods =["cold", "cozy", "calm", "solice", "winter", "chill", "frost", "ice"]
+var moodObject = {"Clear": clearMoods, "Cloudy": cloudyMoods, "Rain": rainMoods, "Drizzle": drizzleMoods, "Thunderstorm": thunderMoods, "Snow": snowMoods}
 
 // this capitalizes the genre search term, and then loops through the whole 
 // long list of genres to find the ID number attached to the genre-word. (The search

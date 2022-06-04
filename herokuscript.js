@@ -18,10 +18,25 @@ var genre = document.querySelector("#genre")
 var submit = document.querySelector("#submit")
 var dropDown = document.querySelector("#dropDown")
 
+
+var history1 = document.querySelector("#history1")
+var history2 = document.querySelector("#history2")
+var history3 = document.querySelector("#history3")
+var history4 = document.querySelector("#history4")
+var history5 = document.querySelector("#history5")
+var historyBox = document.querySelector("#historyBox")
+var searchArray = [
+  history1, 
+  history2, 
+  history3,
+  history4,
+  history5,
+]
+
 var trackNameArray = []
 var trackNumberArray = []
 
-
+var searchIndex = 0
 var termsB
 var idNumber
 var genreTerm
@@ -60,13 +75,14 @@ function genreFetch() {
         }
       }
       fetchCoords()
+      historyFunction()
       genre.value = ""
       place.value = ""
 })}
 
 // the main music search function
 function musicSearch() {
-  fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_lyrics="+randoMoodResult+"&f_music_genre_id="+idNumber+"&apikey="+musicKey)
+  fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_track="+randoMoodResult+"&f_music_genre_id="+idNumber+"&apikey="+musicKey)
     .then(res => res.json())
     .then(data => mResults = data)
     .then(() => console.log("a list of songs based on genre and weather should be here:", mResults))
@@ -179,4 +195,24 @@ function renderResultToScreen(track, artist, album){
     result.innerHTML = 'Woopsie doopsie'
   }
 }
+
+function historyFunction() {
+  
+  if (searchIndex < 5) {
+    searchArray[searchIndex].textContent = place.value + "/" + genre.value
+    searchIndex++
+    }
+    else if (searchIndex >= 5) {searchIndex = 0}
+}
+
+function historyChange() {
+  console.log("history change")
+  console.log(historyBox.value)
+  var splitArray = historyBox.value.split("/")
+  console.log(splitArray)
+  place.value = splitArray[0]
+  genre.value = splitArray[1]
+}
+
 submit.addEventListener("click", genreFetch)
+historyBox.addEventListener("change", historyChange)

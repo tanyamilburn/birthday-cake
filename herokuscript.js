@@ -191,6 +191,7 @@ function renderResultToScreen(track, artist, album){
 }
 function changeBackground(){
   document.querySelector('.hero').classList.add("heroWeather")
+  document.querySelector('.hidden').classList.remove('hidden')
 }
 
 submit.addEventListener("click", genreFetch)

@@ -17,6 +17,9 @@
 .heroWeather{
   background: black url(clouds.jpeg) center / cover;
 }
+.hidden{
+  display: none;
+}
 
 /* The Images are optimized for different devices */
 @media (max-width: 1024px) { .hero-body { background: url(clouds.jpeg) center / cover; } }
@@ -51,13 +54,13 @@
         <p><input id="genre" class="input mt-4 is-medium" type="text" style="width: 43%;" placeholder="Genre"></p></div>
 
         
-        <div class="column"><a href="index.html" class="button mt-4" style="margin-bottom: 20px;">&larr; Go Back</a>
-            <button id="submit" class="button mt-4">Music Search</button></div>
+        <!-- <div class="column"><a href="index.html" class="button mt-4" style="margin-bottom: 20px;">&larr; Go Back</a> -->
+          <div class="column"> <button id="submit" class="button mt-4">Music Search</button></div>
 
 
 
 <!-- Track, Artist, Album Display -->
-<section class="section">
+<section class="section hidden">
     <div class="container">
       <div class="columns">
         <div class="column"> <!-- Track Column -->

@@ -29,12 +29,12 @@ var weatherMoodWord
 var randoMoodResult
 
 // what fun it will be to think of all the words for all the weather.
-var cloudyMoods = ["glum", "pensive", "thoughtful", "gloomy", "blue"]
-var clearMoods = ["happy", "hopeful", "smile", "pleasant", "content", "bliss", "blissful", "sunshine", "bright", "laugh"]
-var rainMoods =["sad", "lonely", "depression", "broken", "isolation", "cold", "rainy", "rain", "dark", "alone", "sorrow", "grief", "despair", "cry", "crying", "cried"]
-var drizzleMoods = ["cold", "icy", "lonely", "sad", "cry"]
-var thunderMoods = ["storm", "stormy", "angry", "anger", "rage", "fear", "scared", "troubled"]
-var snowMoods =["cold", "cozy", "calm", "solice", "winter", "chill", "frost", "ice"]
+var cloudyMoods = ["cloud", "clouds", "cloudy", "gloomy", "blue"]
+var clearMoods = ["happy", "hopeful", "smile", "sunny", "content", "bliss", "blissful", "sunshine", "bright", "sun", "laugh"]
+var rainMoods =["sad", "lonely", "cold", "rainy", "rain", "raining", "dark", "alone", "sorrow", "despair", "cry", "crying", "cried"]
+var drizzleMoods = ["sad", "lonely", "cold", "rainy", "rain", "raining", "dark", "alone", "sorrow", "despair", "cry", "crying", "cried"]
+var thunderMoods = ["storm", "stormy", "angry", "anger", "rage", "troubled", "thunder", "lightning"]
+var snowMoods =["cold", "cozy", "calm", "solice", "winter", "chill", "frost", "ice", "snow", "snowing", "freezing", "frozen", "freeze"]
 var moodObject = {"Clear": clearMoods, "Clouds": cloudyMoods, "Rain": rainMoods, "Drizzle": drizzleMoods, "Thunderstorm": thunderMoods, "Snow": snowMoods}
 
 // this capitalizes the genre search term, and then loops through the whole 
@@ -107,7 +107,7 @@ function convertCoords() {
         //this finds whichever word like "clear" or "cloudy"
         weatherMoodWord = weather.current.weather[0].main
         console.log("variable weatherMoodWord is:", weatherMoodWord)
-
+        changeBackground(weatherMoodWord)
         beginWeatherSearch(weatherMoodWord)
 })}
 
@@ -189,10 +189,28 @@ function renderResultToScreen(track, artist, album){
   // }
   }
 }
-function changeBackground(){
-  document.querySelector('.hero').classList.add("heroWeather")
+function changeBackground(weather){
+  if(weather === "Clouds"){
+    document.querySelector('.hero').classList.add("heroClouds")
+  }
+  else if(weather === "Rain"){
+    document.querySelector('.hero').classList.add("heroRain")
+  }
+  else if(weather === "Drizzle"){
+    document.querySelector('.hero').classList.add("heroRain")
+  }
+  else if(weather === "Snow"){
+    document.querySelector('.hero').classList.add("heroSnow")
+  }
+  else if(weather === "Thunderstorm"){
+    document.querySelector('.hero').classList.add("heroThunderstorm") 
+  }
+  else if(weather === "Clear"){
+    document.querySelector('.hero').classList.add("heroClear")
+  }
+  
   document.querySelector('.hidden').classList.remove('hidden')
 }
 
 submit.addEventListener("click", genreFetch)
-submit.addEventListener("click", changeBackground)
+// submit.addEventListener("click", changeBackground)

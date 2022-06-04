@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music Weather Selector</title>
+    <link rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  </head>
+
+<Style>
+
+.hero{
+  background: black url(clouds.jpeg) center / cover;
+
+}
+
+/* The Images are optimized for different devices */
+@media (max-width: 1024px) { .hero-body { background: url(clouds.jpeg) center / cover; } }
+@media (max-width: 768px) {  .hero-body { background: url(clouds.jpeg) center / cover; } }
+
+
+
+
+</Style>
+
+
+<body>
+<!-- hero head --> 
+
+  <div class="hero-head has-background-black" style="height: 75px;">
+    <div class="columns is-mobile is marginless heading has-text-weight-bold">
+      <div class="column left">
+        <h1 class="navbar-item is-size-6 has-text-white" style="margin-top: 15px;">MUSIC WEATHER SELECTOR</h1>
+      </div>
+    </div>
+  </div>
+
+<!-- Hero Background -->
+  <div class="hero is-fullheight">
+
+    
+<!-- Section -->
+  <section class="section">
+    
+    <div class="column p-4">
+        <p><input id="place" class="input is-medium" type="text" style="width: 43%;" placeholder="City"></p>
+        <p><input id="genre" class="input mt-4 is-medium" type="text" style="width: 43%;" placeholder="Genre"></p></div>
+
+        
+        <div class="column"><a href="index.html" class="button mt-4" style="margin-bottom: 20px;">&larr; Go Back</a>
+            <button id="submit" class="button mt-4">Music Search</button></div>
+
+
+
+<!-- Track, Artist, Album Display -->
+<section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column"> <!-- Track Column -->
+          <h1 class="notification is-primary">Track</h1> 
+            <div class="notification" id="track"></div>
+        </div> 
+        <div class="column"> <!-- Artist Column -->
+          <h1 class="notification is-primary">Artist</h1>
+          <div class="notification" id="artist"></div> 
+        </div> 
+        <div class="column"> <!-- Track Column -->
+          <h1 class="notification is-primary">Album</h1>
+            <div class="notification" id="album"></div> 
+        </div> 
+      </div> 
+    </div> 
+
+
+  
+  </section>
+
+
+
+<script src="herokuscript.js"></script>
+</body>
+</html>

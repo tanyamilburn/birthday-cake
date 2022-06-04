@@ -25,12 +25,28 @@ var history3 = document.querySelector("#history3")
 var history4 = document.querySelector("#history4")
 var history5 = document.querySelector("#history5")
 var historyBox = document.querySelector("#historyBox")
+
 var searchArray = [
   history1, 
   history2, 
   history3,
   history4,
   history5,
+]
+
+
+var storage1 = "storage1"
+var storage2 = "storage2"
+var storage3 = "storage3"
+var storage4 = "storage4"
+var storage5 = "storage5"
+
+var storageArray = [
+  storage1,
+  storage2,
+  storage3,
+  storage4,
+  storage5
 ]
 
 var trackNameArray = []
@@ -200,19 +216,26 @@ function historyFunction() {
   
   if (searchIndex < 5) {
     searchArray[searchIndex].textContent = place.value + "/" + genre.value
+    localStorage.setItem(storageArray[searchIndex], searchArray[searchIndex].value)
     searchIndex++
     }
     else if (searchIndex >= 5) {searchIndex = 0}
 }
 
 function historyChange() {
-  console.log("history change")
-  console.log(historyBox.value)
   var splitArray = historyBox.value.split("/")
-  console.log(splitArray)
   place.value = splitArray[0]
   genre.value = splitArray[1]
 }
 
+function initHistory() {
+  history1.textContent = localStorage.getItem(storageArray[0])
+  history2.textContent = localStorage.getItem(storageArray[1])
+  history3.textContent = localStorage.getItem(storageArray[2])
+  history4.textContent = localStorage.getItem(storageArray[3])
+  history5.textContent = localStorage.getItem(storageArray[4])
+}
+
+initHistory()
 submit.addEventListener("click", genreFetch)
 historyBox.addEventListener("change", historyChange)

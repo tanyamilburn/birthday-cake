@@ -164,6 +164,7 @@ function pushFunction() {
           "|album:", album_name,
           "|artist:", artist_name
         )
+        // redirectPage()
         renderResultToScreen(track_name, artist_name, album_name)
       } else {
         renderResultToScreen()
@@ -173,17 +174,24 @@ function pushFunction() {
 
 function renderResultToScreen(track, artist, album){
 
-  result = document.querySelector(".songDisplay")
+  artistResult = document.querySelector("#artist")
+  trackResult = document.querySelector("#track")
+  albumResult = document.querySelector("#album")
 
   if(track && artist && album) {
-    result.innerHTML = `Track: ${track} Artist: ${artist} Album: ${album}`
+    artistResult.innerHTML = `${artist}` 
+    trackResult.innerHTML = `${track}`
+    albumResult.innerHTML = `${album}`
     // submit.addEventListener("click", redirectPage)
     console.log(track)
-  } else {
-    result.innerHTML = "Oops, try again!"
+  // } else {
+  //   // result.innerHTML = "Oops, try again!"
+  // }
   }
 }
-
+function changeBackground(){
+  document.querySelector('.hero').classList.add("heroWeather")
+}
 
 submit.addEventListener("click", genreFetch)
-// submit.addEventListener("click", redirectPage)
+submit.addEventListener("click", changeBackground)

@@ -62,6 +62,7 @@ function genreFetch() {
       fetchCoords()
       genre.value = ""
       place.value = ""
+      
 })}
 
 // the main music search function
@@ -155,6 +156,7 @@ function pushFunction() {
     .then(data => {
       console.log('data', data)
       if(data.message.body) {
+        
         const { track_name, artist_name, album_name } = data.message.body.track
 
         console.log(
@@ -162,6 +164,7 @@ function pushFunction() {
           "|album:", album_name,
           "|artist:", artist_name
         )
+        // redirectPage()
         renderResultToScreen(track_name, artist_name, album_name)
       } else {
         renderResultToScreen()
@@ -170,13 +173,25 @@ function pushFunction() {
 }
 
 function renderResultToScreen(track, artist, album){
-  result = document.querySelector(".songDisplay")
+
+  artistResult = document.querySelector("#artist")
+  trackResult = document.querySelector("#track")
+  albumResult = document.querySelector("#album")
 
   if(track && artist && album) {
-    result.innerHTML = `${track} ${artist} ${album}`
+    artistResult.innerHTML = `${artist}` 
+    trackResult.innerHTML = `${track}`
+    albumResult.innerHTML = `${album}`
+    // submit.addEventListener("click", redirectPage)
     console.log(track)
-  } else {
-    result.innerHTML = 'Woopsie doopsie'
+  // } else {
+  //   // result.innerHTML = "Oops, try again!"
+  // }
   }
 }
+function changeBackground(){
+  document.querySelector('.hero').classList.add("heroWeather")
+}
+
 submit.addEventListener("click", genreFetch)
+submit.addEventListener("click", changeBackground)

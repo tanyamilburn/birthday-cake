@@ -62,6 +62,7 @@ function genreFetch() {
       fetchCoords()
       genre.value = ""
       place.value = ""
+      
 })}
 
 // the main music search function
@@ -155,6 +156,7 @@ function pushFunction() {
     .then(data => {
       console.log('data', data)
       if(data.message.body) {
+        
         const { track_name, artist_name, album_name } = data.message.body.track
 
         console.log(
@@ -170,13 +172,18 @@ function pushFunction() {
 }
 
 function renderResultToScreen(track, artist, album){
+
   result = document.querySelector(".songDisplay")
 
   if(track && artist && album) {
-    result.innerHTML = `${track} ${artist} ${album}`
+    result.innerHTML = `Track: ${track} Artist: ${artist} Album: ${album}`
+    // submit.addEventListener("click", redirectPage)
     console.log(track)
   } else {
-    result.innerHTML = 'Woopsie doopsie'
+    result.innerHTML = "Oops, try again!"
   }
 }
+
+
 submit.addEventListener("click", genreFetch)
+// submit.addEventListener("click", redirectPage)

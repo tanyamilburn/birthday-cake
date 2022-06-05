@@ -188,8 +188,13 @@ function renderResultToScreen(track, artist, album){
   //   // result.innerHTML = "Oops, try again!"
   // }
   }
+
 }
+// function addClass (){
+  
+// }
 function changeBackground(weather){
+  document.querySelector('.hero').classList.remove("heroClouds", "heroRain", "heroSnow", "heroThunderstorm", "heroClear") 
   if(weather === "Clouds"){
     document.querySelector('.hero').classList.add("heroClouds")
   }
@@ -209,8 +214,8 @@ function changeBackground(weather){
     document.querySelector('.hero').classList.add("heroClear")
   }
   
-  document.querySelector('.hidden').classList.remove('hidden')
+  document.querySelector('.display').classList.remove('hidden')
 }
 
 submit.addEventListener("click", genreFetch)
-// submit.addEventListener("click", changeBackground)
+// submit.addEventListener("click", addClass)

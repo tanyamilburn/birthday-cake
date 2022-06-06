@@ -18,10 +18,39 @@ var genre = document.querySelector("#genre")
 var submit = document.querySelector("#submit")
 var dropDown = document.querySelector("#dropDown")
 
+var history1 = document.querySelector("#history1")
+var history2 = document.querySelector("#history2")
+var history3 = document.querySelector("#history3")
+var history4 = document.querySelector("#history4")
+var history5 = document.querySelector("#history5")
+var historyBox = document.querySelector("#historyBox")
+
+var searchArray = [
+  history1, 
+  history2, 
+  history3,
+  history4,
+  history5,
+]
+
+var storage1 = "storage1"
+var storage2 = "storage2"
+var storage3 = "storage3"
+var storage4 = "storage4"
+var storage5 = "storage5"
+
+var storageArray = [
+  storage1,
+  storage2,
+  storage3,
+  storage4,
+  storage5
+]
+
 var trackNameArray = []
 var trackNumberArray = []
 
-
+var searchIndex = 0
 var termsB
 var idNumber
 var genreTerm
@@ -60,6 +89,7 @@ function genreFetch() {
         }
       }
       fetchCoords()
+      historyFunction()
       genre.value = ""
       place.value = ""
       
@@ -67,7 +97,7 @@ function genreFetch() {
 
 // the main music search function
 function musicSearch() {
-  fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_lyrics="+randoMoodResult+"&f_music_genre_id="+idNumber+"&apikey="+musicKey)
+  fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_track="+randoMoodResult+"&f_music_genre_id="+idNumber+"&apikey="+musicKey)
     .then(res => res.json())
     .then(data => mResults = data)
     .then(() => console.log("a list of songs based on genre and weather should be here:", mResults))
@@ -217,5 +247,34 @@ function changeBackground(weather){
   document.querySelector('.display').classList.remove('hidden')
 }
 
+function historyFunction() {
+    if (searchIndex < 5) {
+    
+
+    searchArray[searchIndex].textContent = place.value + "/" + genre.value
+    localStorage.setItem(storageArray[searchIndex], searchArray[searchIndex].value)
+    searchArray[searchIndex].removeAttribute('disabled')
+
+    searchIndex++
+    }
+    else if (searchIndex >= 5) {searchIndex = 0}
+}
+
+function historyChange() {
+  var splitArray = historyBox.value.split("/")
+  place.value = splitArray[0]
+  genre.value = splitArray[1]
+}
+
+function initHistory() {
+  history1.textContent = localStorage.getItem(storageArray[0])
+  history2.textContent = localStorage.getItem(storageArray[1])
+  history3.textContent = localStorage.getItem(storageArray[2])
+  history4.textContent = localStorage.getItem(storageArray[3])
+  history5.textContent = localStorage.getItem(storageArray[4])
+}
+
+initHistory()
+historyBox.addEventListener("change", historyChange)
 submit.addEventListener("click", genreFetch)
 // submit.addEventListener("click", addClass)

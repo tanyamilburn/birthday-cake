@@ -249,13 +249,10 @@ function changeBackground(weather){
 
 function historyFunction() {
     if (searchIndex < 5) {
-    
-
-    searchArray[searchIndex].textContent = place.value + "/" + genre.value
-    localStorage.setItem(storageArray[searchIndex], searchArray[searchIndex].value)
-    searchArray[searchIndex].removeAttribute('disabled')
-
-    searchIndex++
+      searchArray[searchIndex].textContent = place.value + "/" + genre.value
+      localStorage.setItem(storageArray[searchIndex], searchArray[searchIndex].value)
+      searchArray[searchIndex].removeAttribute('disabled')
+      searchIndex++
     }
     else if (searchIndex >= 5) {searchIndex = 0}
 }

@@ -83,17 +83,33 @@ function genreFetch() {
           idNumber = allGenres.message.body.music_genre_list[i].music_genre.music_genre_id
           console.log("genre chosen:", genreTerm)
           console.log("genre id is:", idNumber)
-        }
-        else {
-          console.log("not found")
-        }
-      }
-      fetchCoords()
-      historyFunction()
-      genre.value = ""
-      place.value = ""
+          historyFunction()
+
+          return fetchCoords()
+        }}
+        for (let i = 0;i < allGenres.message.body.music_genre_list.length; i++) {
+          if (allGenres.message.body.music_genre_list[i].music_genre.music_genre_name !== genreTerm) {
+              console.log(genreTerm , "not found")
+              submit.textContent = genreTerm + " not found"
+              setTimeout(changeSubmitText, 1500)
+              }}
+        // else if (allGenres.message.body.music_genre_list[i].music_genre.music_genre_name !== genreTerm) {
+        //   console.log(genreTerm , "not found")
+        //   submit.textContent = genreTerm + " not found"
+        //   setTimeout(changeSubmitText, 2000)
+        // }
+        // // else {
+        //   console.log("not found")
+        // }
       
-})}
+      //fetchCoords()
+      
+      
+      })}
+
+function changeSubmitText() {
+  submit.textContent = "Music Search"
+}
 
 // the main music search function
 function musicSearch() {
@@ -128,6 +144,7 @@ function convertCoords() {
   fetch("https://blooming-lowlands-18463.herokuapp.com/https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&appid="+weatherKey+"&units=imperial")
     .then(function (response) {
         if (!response.ok) {
+          console.log("city not found")
           throw response.json();
         }
         return response.json()
@@ -203,7 +220,8 @@ function pushFunction() {
 }
 
 function renderResultToScreen(track, artist, album){
-
+  genre.value = ""
+  place.value = ""
   artistResult = document.querySelector("#artist")
   trackResult = document.querySelector("#track")
   albumResult = document.querySelector("#album")
@@ -264,12 +282,22 @@ function historyChange() {
 }
 
 function initHistory() {
-  history1.textContent = localStorage.getItem(storageArray[0])
-  history2.textContent = localStorage.getItem(storageArray[1])
-  history3.textContent = localStorage.getItem(storageArray[2])
-  history4.textContent = localStorage.getItem(storageArray[3])
-  history5.textContent = localStorage.getItem(storageArray[4])
-}
+  for (let i = 0; i < 5; i++) {
+    if (localStorage.getItem(storageArray[i])) {
+      searchArray[i].textContent = localStorage.getItem(storageArray[i])
+      searchArray[i].removeAttribute('disabled')
+      console.log("it's here!")
+    }
+    else (
+      console.log("it is not there")
+    )
+    }
+  // history1.textContent = localStorage.getItem(storageArray[0])
+  // history2.textContent = localStorage.getItem(storageArray[1])
+  // history3.textContent = localStorage.getItem(storageArray[2])
+  // history4.textContent = localStorage.getItem(storageArray[3])
+  // history5.textContent = localStorage.getItem(storageArray[4])
+  }
 
 initHistory()
 historyBox.addEventListener("change", historyChange)
